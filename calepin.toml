@@ -1,0 +1,90 @@
+title = "ООП в python"
+description = "Об особенностях принципов ООП в языке python"
+# base-url = "https://example.com"
+# Try the bundled themes:
+theme = "calepin"
+# theme = "academic"
+
+pdf = true
+default-language = "ru"
+
+# Uncomment to generate static search if Pagefind is available.
+# search = "pagefind"
+
+# Uncomment to generate web feeds after setting base-url.
+# feeds = true
+
+# [languages.en]
+# label = "English"
+# content-dir = "fr"
+
+[languages.ru]
+label = "Русский"
+content-dir = "."
+
+# [languages.fr]
+# label = "Français"
+# content-dir = "fr"
+
+[static]
+include = ["assets/**"]
+
+[pages]
+include = ["posts/*.typ"]
+
+# [[menus.main]]
+# target = "about.typ"
+# label = "About"
+#
+# [[menus.main]]
+# target = "blog.typ"
+# label = "Blog"
+
+# [[menus.social]]
+# target = "https://scholar.google.com/citations?user=RKN66-kAAAAJ&hl"
+# label = "{icon:simple-icons:googlescholar}"
+# aria-label = "Google Scholar"
+
+[[menus.social]]
+target = "https://github.com/Daniil-Chovgan/python_oop"
+label = "{icon:github}"
+aria-label = "GitHub"
+
+# [footer]
+
+# [[footer.item]]
+# target = "https://vincentarelbundock.github.io/calepin"
+# label = "Made with Calepin"
+
+[sidebar]
+fold = true
+
+[[sidebar.section]]
+title = "Start"
+
+  [[sidebar.section.item]]
+  target = "index.typ"
+
+  # [[sidebar.section.item]]
+  # target = "about.typ"
+
+# [[sidebar.section]]
+# title = "Guide"
+#
+#   [[sidebar.section.item]]
+#   target = "guide/features.typ"
+#
+#   [[sidebar.section.item]]
+#   target = "guide/writing.typ"
+
+# [[sidebar.section]]
+# title = "Publishing"
+#
+#   [[sidebar.section.item]]
+#   target = "blog.typ"
+
+# [[sidebar.section]]
+# title = "Slide"
+#
+#   [[sidebar.section.item]]
+#   target = "slides/test.typ"
