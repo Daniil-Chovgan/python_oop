@@ -60,7 +60,7 @@ aria-label = "GitHub"
 fold = true
 
 [[sidebar.section]]
-title = "Start"
+title = "Начало"
 
   [[sidebar.section.item]]
   target = "index.typ"
@@ -68,11 +68,11 @@ title = "Start"
   # [[sidebar.section.item]]
   # target = "about.typ"
 
-# [[sidebar.section]]
-# title = "Guide"
-#
-#   [[sidebar.section.item]]
-#   target = "guide/features.typ"
+[[sidebar.section]]
+title = "Наследование"
+
+  [[sidebar.section.item]]
+  target = "mro/mro.typ"
 #
 #   [[sidebar.section.item]]
 #   target = "guide/writing.typ"

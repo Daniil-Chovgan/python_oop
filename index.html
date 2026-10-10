@@ -2898,13 +2898,34 @@ html:not([data-theme]) {
 
 
 <details class="calepin-website-sidebar-section" data-calepin-sidebar-depth="0" open>
-    <summary>Start</summary>
+    <summary>Начало</summary>
 
 
 <ul>
     
     
 <li class="calepin-website-sidebar-link"><a href="index.html" aria-label="Home" class="active" aria-current="page">Home</a></li>
+
+    
+</ul>
+
+
+
+</details>
+
+
+                    
+                    
+
+
+<details class="calepin-website-sidebar-section" data-calepin-sidebar-depth="0">
+    <summary>Наследование</summary>
+
+
+<ul>
+    
+    
+<li class="calepin-website-sidebar-link"><a href="mro/mro.html" aria-label="MRO">MRO</a></li>
 
     
 </ul>
@@ -2936,13 +2957,13 @@ html:not([data-theme]) {
 </code></pre></div><div class="cell-output cell-output-stdout"><pre><code>['__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__firstlineno__', '__format__', '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__static_attributes__', '__str__', '__subclasshook__', '__weakref__']</code></pre></div><div class="sourceCode" data-lang="python"><pre><code data-lang="python"><span class="calepin-syntax-scope-21">vars</span>(Test)
 </code></pre></div><div class="cell-output cell-output-stdout"><pre><code>mappingproxy({'__module__': '__main__', '__firstlineno__': 1, '__static_attributes__': (), '__dict__': &lt;attribute '__dict__' of 'Test' objects>, '__weakref__': &lt;attribute '__weakref__' of 'Test' objects>, '__doc__': None})</code></pre></div><p>Чтобы создать объект класса достаточно вызвать его с синтаксисом похожим на функцию</p><div class="sourceCode" data-lang="python"><pre><code data-lang="python">a <span class="calepin-syntax-scope-27">=</span> <span class="calepin-syntax-scope-22">Test</span>()
 a
-</code></pre></div><div class="cell-output cell-output-stdout"><pre><code>&lt;__main__.Test object at 0x10100af90></code></pre></div><p>На самом деле это и является неявно вызываемыми функциями, которая вызывается каждый раз при создании объекта. А конкретно метод <code>__new__</code> класса Test (выделяет память и создает объект данного класса). А так же метод <code>__init__()</code> объекта, который дает логику внутрь объекта (к примеру заполняет его поля). Так что семантически такой вариант будет аналогичным:</p><div class="sourceCode" data-lang="python"><pre><code data-lang="python">a <span class="calepin-syntax-scope-27">=</span> Test.<span class="calepin-syntax-scope-21">__new__</span>(Test)
+</code></pre></div><div class="cell-output cell-output-stdout"><pre><code>&lt;__main__.Test object at 0x1055c2f90></code></pre></div><p>На самом деле это и является неявно вызываемыми функциями, которая вызывается каждый раз при создании объекта. А конкретно метод <code>__new__</code> класса Test (выделяет память и создает объект данного класса). А так же метод <code>__init__()</code> объекта, который дает логику внутрь объекта (к примеру заполняет его поля). Так что семантически такой вариант будет аналогичным:</p><div class="sourceCode" data-lang="python"><pre><code data-lang="python">a <span class="calepin-syntax-scope-27">=</span> Test.<span class="calepin-syntax-scope-21">__new__</span>(Test)
 
 <span class="calepin-syntax-scope-10">if</span> <span class="calepin-syntax-scope-21">isinstance</span>(a<span class="calepin-syntax-scope-26">,</span> Test):
     a.<span class="calepin-syntax-scope-21">__init__</span>()
 
 a
-</code></pre></div><div class="cell-output cell-output-stdout"><pre><code>&lt;__main__.Test object at 0x10109a210></code></pre></div><p>Так что если при написании класса мы определим метод <code>__init__</code>, тогда объект класса будет иметь соответсвующую логику::</p><div class="sourceCode" data-lang="python"><pre><code data-lang="python"><span class="calepin-syntax-scope-6">class</span> <span class="calepin-syntax-scope-15">Test</span>:
+</code></pre></div><div class="cell-output cell-output-stdout"><pre><code>&lt;__main__.Test object at 0x105651d10></code></pre></div><p>Так что если при написании класса мы определим метод <code>__init__</code>, тогда объект класса будет иметь соответсвующую логику::</p><div class="sourceCode" data-lang="python"><pre><code data-lang="python"><span class="calepin-syntax-scope-6">class</span> <span class="calepin-syntax-scope-15">Test</span>:
     <span class="calepin-syntax-scope-6">def</span> <span class="calepin-syntax-scope-21">__init__</span>(<span class="calepin-syntax-scope-28">self</span>):
         <span class="calepin-syntax-scope-21">print</span>(<span class="calepin-syntax-scope-4">"</span><span class="calepin-syntax-scope-3">Hello, world!</span><span class="calepin-syntax-scope-4">"</span>)
         <span class="calepin-syntax-scope-12">self</span>.a <span class="calepin-syntax-scope-27">=</span> <span class="calepin-syntax-scope-23">123</span>
@@ -3014,13 +3035,13 @@ b.<span class="calepin-syntax-scope-22">something</span>()</code></pre></div><di
         <span class="calepin-syntax-scope-10">return</span> <span class="calepin-syntax-scope-12">self</span>.x <span class="calepin-syntax-scope-24">*</span> <span class="calepin-syntax-scope-23">2</span>
 
 <span class="calepin-syntax-scope-22">MyClass</span>()
-</code></pre></div><div class="cell-output cell-output-stdout"><pre><code>&lt;__main__.MyClass object at 0x10100b0e0></code></pre></div><p>С помощью конструктора type мы можем создать MyClass во время выполнения:</p><div class="sourceCode" data-lang="python"><pre><code data-lang="python">MyClass <span class="calepin-syntax-scope-27">=</span> <span class="calepin-syntax-scope-21">type</span>(<span class="calepin-syntax-scope-4">'</span><span class="calepin-syntax-scope-3">MyClass</span><span class="calepin-syntax-scope-4">'</span><span class="calepin-syntax-scope-26">,</span>
+</code></pre></div><div class="cell-output cell-output-stdout"><pre><code>&lt;__main__.MyClass object at 0x1055c2f90></code></pre></div><p>С помощью конструктора type мы можем создать MyClass во время выполнения:</p><div class="sourceCode" data-lang="python"><pre><code data-lang="python">MyClass <span class="calepin-syntax-scope-27">=</span> <span class="calepin-syntax-scope-21">type</span>(<span class="calepin-syntax-scope-4">'</span><span class="calepin-syntax-scope-3">MyClass</span><span class="calepin-syntax-scope-4">'</span><span class="calepin-syntax-scope-26">,</span>
         (MySuperClass<span class="calepin-syntax-scope-26">,</span> MyMixin)<span class="calepin-syntax-scope-26">,</span>
         {<span class="calepin-syntax-scope-4">'</span><span class="calepin-syntax-scope-3">x</span><span class="calepin-syntax-scope-4">'</span><span class="calepin-syntax-scope-26">:</span> <span class="calepin-syntax-scope-23">42</span><span class="calepin-syntax-scope-26">,</span> <span class="calepin-syntax-scope-4">'</span><span class="calepin-syntax-scope-3">x2</span><span class="calepin-syntax-scope-4">'</span><span class="calepin-syntax-scope-26">:</span> <span class="calepin-syntax-scope-6">lambda</span> <span class="calepin-syntax-scope-28">self</span>: <span class="calepin-syntax-scope-12">self</span>.x <span class="calepin-syntax-scope-24">*</span> <span class="calepin-syntax-scope-23">2</span>}<span class="calepin-syntax-scope-26">,</span>
     )
 
 <span class="calepin-syntax-scope-22">MyClass</span>()
-</code></pre></div><div class="cell-output cell-output-stdout"><pre><code>&lt;__main__.MyClass object at 0x10100b0e0></code></pre></div>
+</code></pre></div><div class="cell-output cell-output-stdout"><pre><code>&lt;__main__.MyClass object at 0x1055c2f90></code></pre></div>
         </main>
                 
         <aside class="calepin-website-toc is-floating">
@@ -3056,7 +3077,35 @@ b.<span class="calepin-syntax-scope-22">something</span>()</code></pre></div><di
         
         
     
+        
+        
+            
+            
+        
+        
+            
+        
+        
+    
 
+    
+    <footer class="calepin-website-page-nav" aria-label="Page navigation">
+      <div class="calepin-website-page-nav-inner">
+        
+        <span class="calepin-website-page-nav-empty" aria-hidden="true"></span>
+        
+
+        
+        <a class="calepin-website-page-nav-link calepin-website-page-nav-link--next outline secondary" href="mro/mro.html" role="button">
+          <span class="calepin-website-page-nav-content">
+            <span class="calepin-website-page-nav-kind">Next</span>
+            <span class="calepin-website-page-nav-title">MRO</span>
+          </span>
+          <span class="calepin-website-page-nav-arrow" aria-hidden="true">&rarr;</span>
+        </a>
+        
+      </div>
+    </footer>
     
     
 
