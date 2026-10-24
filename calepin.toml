@@ -62,6 +62,10 @@ title = "Начало"
   [[sidebar.section.item]]
   target = "base_terms.typ"
 
+  [[sidebar.section.item]]
+  target = "program_design/program_design.typ"
+
+
 [[sidebar.section]]
 title = "Принципы ООП"
 

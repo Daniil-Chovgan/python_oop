@@ -4,9 +4,9 @@
     
     
     
-    <meta name="description" content="Об особенностях принципов ООП в языке python">
-    <meta property="og:description" content="Об особенностях принципов ООП в языке python">
-    <meta name="twitter:description" content="Об особенностях принципов ООП в языке python">
+    <meta name="description" content="В отличие от классических статически типизированных языков, в Python полиморфизм гораздо шире и проникает на все уровни языка — от классического наследования до динамических протоколов">
+    <meta property="og:description" content="В отличие от классических статически типизированных языков, в Python полиморфизм гораздо шире и проникает на все уровни языка — от классического наследования до динамических протоколов">
+    <meta name="twitter:description" content="В отличие от классических статически типизированных языков, в Python полиморфизм гораздо шире и проникает на все уровни языка — от классического наследования до динамических протоколов">
     
     
     
@@ -2837,7 +2837,7 @@ html:not([data-theme]) {
     <script src="../../pagefind/pagefind-component-ui.js" type="module"></script>
 
 
-<script id="calepin-website-source-data" type="application/json">"#import \"/.calepin/calepin.typ\" as calepin\n\n#set document(title: [Полиморфизм])\n#metadata((title: \"Полиморфизм\", translation_key: \"polymorphism\")) \u003cwebsite-metadata\u003e\n\n#calepin.setup(\n  echo: true,\n  eval: true,\n  results: \"verbatim\",\n  fenced-chunks: true,\n)\n\n#let target = sys.inputs.at(\"calepin-target\", default: \"paged\")\n\n#show: body =\u003e {\n  if target == \"html\" {\n    show \u003ccalepin-input\u003e: it =\u003e it.body\n    body\n  } else {\n    import \"@preview/codly:1.3.0\": *\n    import \"@preview/codly-languages:0.1.10\": *\n    show: codly-init\n    show: calepin.document\n    codly(languages: codly-languages)\n    codly(number-format: none)\n    show \u003ccalepin-input\u003e: it =\u003e it.body\n    set raw(theme: \"/.calepin/syntax.tmTheme\")\n    body\n  }\n}\n\n#calepin.setup(echo: true)\n\n#title()\n\n#calepin.elements.card[\nПолиморфизм -- способность объекта по одному и тому же интерфейсу отвечать по-разному, в зависимости от реализации.#footnote[определение из лекции по ООП от 10.10.26]\n]\n#calepin.elements.card[\nПолиморфизм -- Означает, что схожие объекты способны по-разному отвечать на одно и то же сообщение.#footnote[Объектно-ориентированное мышление -- Мэтт Вайсфельд] \u003coop\u003e\n]\n"</script>
+<script id="calepin-website-source-data" type="application/json">"#import \"/.calepin/calepin.typ\" as calepin\n\n#set document(title: [Полиморфизм])\n#metadata((title: \"Полиморфизм\", translation_key: \"polymorphism\")) \u003cwebsite-metadata\u003e\n\n#calepin.setup(\n  echo: true,\n  eval: true,\n  results: \"verbatim\",\n  fenced-chunks: true,\n)\n\n#let target = sys.inputs.at(\"calepin-target\", default: \"paged\")\n\n#show: body =\u003e {\n  if target == \"html\" {\n    show \u003ccalepin-input\u003e: it =\u003e it.body\n    body\n  } else {\n    import \"@preview/codly:1.3.0\": *\n    import \"@preview/codly-languages:0.1.10\": *\n    show: codly-init\n    show: calepin.document\n    codly(languages: codly-languages)\n    codly(number-format: none)\n    show \u003ccalepin-input\u003e: it =\u003e it.body\n    set raw(theme: \"/.calepin/syntax.tmTheme\")\n    body\n  }\n}\n\n#calepin.setup(echo: true)\n\n#title()\n\n#calepin.elements.card[\nПолиморфизм -- способность объекта по одному и тому же интерфейсу отвечать по-разному, в зависимости от реализации.#footnote[определение из лекции по ООП от 10.10.26]\n]\n#calepin.elements.card[\nПолиморфизм -- Означает, что схожие объекты способны по-разному отвечать на одно и то же сообщение.#footnote[Объектно-ориентированное мышление -- Мэтт Вайсфельд] \u003coop\u003e\n]\n\nВ отличие от классических статически типизированных языков, в Python полиморфизм гораздо шире и проникает на все уровни языка — от классического наследования до динамических протоколов\n\n== Классический полиморфизм через наследование и переопределение методов\n\nВ традиционном ООП родительский класс определяет общий интерфейс (например, метод `draw()`), а дочерние классы переопределяют этот метод своей конкретной реализацией\n\n```python\nclass Shape:\n    def draw(self) -\u003e None:\n        pass\n\nclass Circle(Shape):\n    def draw(self) -\u003e None:\n        print(\"Рисуем круг\")\n\nclass Rectangle(Shape):\n    def draw(self) -\u003e None:\n        print(\"Рисуем прямоугольник\")\n\n```\n\nЕдиный интерфейс, но разное поведение объектов `shapes`:\n```python\nshapes: list[Shape] = [Circle(), Rectangle()]\nfor shape in shapes:\n    shape.draw()\n```\n\n== Утиная типизация\nВ Python наследование от общего базового класса вовсе не обязательно. Главный принцип динамической утиной типизации гласит: если объект поддерживает необходимый метод или операцию, не имеет значения, к какому классу он принадлежит.\n\n```python\nclass Document:\n    def render(self) -\u003e None:\n        print(\"Рендеринг документа...\")\n\nclass Image:\n    def render(self) -\u003e None:\n        print(\"Отображение картинки...\")\n\ndef display(printable_object) -\u003e None:\n    printable_object.render()\n```\n\nИ такие вызовы работают без общего родительского класса:\n```python\ndisplay(Document())\ndisplay(Image())\n```\nСреда выполнения Python проверяет наличие и поддержку операций объектом непосредственно в момент выполнения\n\n== Статическая утиная типизация\n\nЧтобы сохранить гибкость утиной типизации и при этом дать возможность статическим анализаторам (таким как Mypy) проверять типы до запуска программы, в Python используются протоколы из модуля `typing`\n\n```python\nfrom typing import Protocol\n\nclass Renderable(Protocol):\n    def render(self) -\u003e None: ...\n\nclass WebPage:\n    def render(self) -\u003e None:\n        print(\"Отображение веб-страницы\")\n\ndef render_element(element: Renderable) -\u003e None:\n    element.render()\n\nrender_element(WebPage())\n```\n\nКлассу не требуется явно объявлять наследование от протокола — достаточно просто реализовать совпадающие методы\n\n== Гусиная типизация\n\nКогда необходимо явно зафиксировать контракт интерфейса во время выполнения, используется проверка принадлежности к абстрактным базовым классам (ABC) с помощью\n\n```python\nfrom collections.abc import Iterable\n\ndef process_items(items: Iterable) -\u003e None:\n    if isinstance(items, Iterable):\n        for item in items:\n            print(item)\n```\nПроверка через ABC разрешает полиморфизм для любых итерируемых объектов\n\nЭто позволяет проверять соответствие интерфейсу, сохраняя полиморфизм для любых совместимых классов или зарегистрированных виртуальных подклассов\n\n== Одиночная диспетчеризация\n\nПолиморфизм на уровне отдельных функций позволяет выполнять разный код в зависимости от типа переданного аргумента во время выполнения\n\n```python\nfrom functools import singledispatch\n\n@singledispatch\ndef process(data) -\u003e None:\n    print(f\"Базовая обработка: {data}\")\n\n@process.register(int)\ndef _(data: int) -\u003e None:\n    print(f\"Числовая обработка: {data * 2}\")\n\n@process.register(list)\ndef _(data: list) -\u003e None:\n    print(f\"Список из {len(data)} элементов\")\n\nprocess(\"текст\")\nprocess(10)\nprocess([23, 24])\n```\n\nТакой подход облегчает модульное расширение программы без раздувания цепочек `if/elif` или изменения существующих классов\n"</script>
 </head><body>
 
     <header class="calepin-website-topbar calepin-site-topbar">
@@ -2935,6 +2935,10 @@ html:not([data-theme]) {
 <li class="calepin-website-sidebar-link"><a href="../../base_terms.html" aria-label="Основные понятия">Основные понятия</a></li>
 
     
+    
+<li class="calepin-website-sidebar-link"><a href="../../program_design/program_design.html" aria-label="Основы проектирования">Основы проектирования</a></li>
+
+    
 </ul>
 
 
@@ -2988,12 +2992,97 @@ html:not([data-theme]) {
             </nav>
         </aside>
         <main class="calepin-website-main calepin-content" data-pagefind-body>
-            <h1 id="section">Полиморфизм</h1><article class="calepin-elements-card" style="display: block; margin-block: 1rem; padding: 1rem; overflow: hidden; border: 1px solid var(--pico-muted-border-color); border-radius: 0.8rem; background: var(--pico-background-color); color: var(--pico-color); box-shadow: 0 0.65rem 1.5rem rgba(15, 23, 42, 0.08); max-width: 100%;">Полиморфизм – способность объекта по одному и тому же интерфейсу отвечать по-разному, в зависимости от реализации.<sup id="loc-1" role="doc-noteref"><a href="#loc-2">1</a></sup></article><article class="calepin-elements-card" style="display: block; margin-block: 1rem; padding: 1rem; overflow: hidden; border: 1px solid var(--pico-muted-border-color); border-radius: 0.8rem; background: var(--pico-background-color); color: var(--pico-color); box-shadow: 0 0.65rem 1.5rem rgba(15, 23, 42, 0.08); max-width: 100%;">Полиморфизм – Означает, что схожие объекты способны по-разному отвечать на одно и то же сообщение.<sup id="oop" role="doc-noteref"><a href="#loc-3">2</a></sup></article><section role="doc-endnotes"><ol style="list-style-type: none"><li id="loc-2"><sup role="doc-backlink"><a href="#loc-1">1</a></sup>определение из лекции по ООП от 10.10.26</li><li id="loc-3"><sup role="doc-backlink"><a href="#oop">2</a></sup>Объектно-ориентированное мышление – Мэтт Вайсфельд</li></ol></section>
+            <h1 id="section">Полиморфизм</h1><article class="calepin-elements-card" style="display: block; margin-block: 1rem; padding: 1rem; overflow: hidden; border: 1px solid var(--pico-muted-border-color); border-radius: 0.8rem; background: var(--pico-background-color); color: var(--pico-color); box-shadow: 0 0.65rem 1.5rem rgba(15, 23, 42, 0.08); max-width: 100%;">Полиморфизм – способность объекта по одному и тому же интерфейсу отвечать по-разному, в зависимости от реализации.<sup id="loc-1" role="doc-noteref"><a href="#loc-2">1</a></sup></article><article class="calepin-elements-card" style="display: block; margin-block: 1rem; padding: 1rem; overflow: hidden; border: 1px solid var(--pico-muted-border-color); border-radius: 0.8rem; background: var(--pico-background-color); color: var(--pico-color); box-shadow: 0 0.65rem 1.5rem rgba(15, 23, 42, 0.08); max-width: 100%;">Полиморфизм – Означает, что схожие объекты способны по-разному отвечать на одно и то же сообщение.<sup id="oop" role="doc-noteref"><a href="#loc-3">2</a></sup></article><p>В отличие от классических статически типизированных языков, в Python полиморфизм гораздо шире и проникает на все уровни языка — от классического наследования до динамических протоколов</p><h3 id="section-2">Классический полиморфизм через наследование и переопределение методов</h3><p>В традиционном ООП родительский класс определяет общий интерфейс (например, метод <code>draw()</code>), а дочерние классы переопределяют этот метод своей конкретной реализацией</p><div class="sourceCode" data-lang="python"><pre><code data-lang="python"><span class="calepin-syntax-scope-6">class</span> <span class="calepin-syntax-scope-15">Shape</span>:
+    <span class="calepin-syntax-scope-6">def</span> <span class="calepin-syntax-scope-20">draw</span>(<span class="calepin-syntax-scope-28">self</span>) <span class="calepin-syntax-scope-26">-></span> <span class="calepin-syntax-scope-11">None</span>:
+        <span class="calepin-syntax-scope-10">pass</span>
+
+<span class="calepin-syntax-scope-6">class</span> <span class="calepin-syntax-scope-15">Circle</span>(Shape):
+    <span class="calepin-syntax-scope-6">def</span> <span class="calepin-syntax-scope-20">draw</span>(<span class="calepin-syntax-scope-28">self</span>) <span class="calepin-syntax-scope-26">-></span> <span class="calepin-syntax-scope-11">None</span>:
+        <span class="calepin-syntax-scope-21">print</span>(<span class="calepin-syntax-scope-4">"</span><span class="calepin-syntax-scope-3">Рисуем круг</span><span class="calepin-syntax-scope-4">"</span>)
+
+<span class="calepin-syntax-scope-6">class</span> <span class="calepin-syntax-scope-15">Rectangle</span>(Shape):
+    <span class="calepin-syntax-scope-6">def</span> <span class="calepin-syntax-scope-20">draw</span>(<span class="calepin-syntax-scope-28">self</span>) <span class="calepin-syntax-scope-26">-></span> <span class="calepin-syntax-scope-11">None</span>:
+        <span class="calepin-syntax-scope-21">print</span>(<span class="calepin-syntax-scope-4">"</span><span class="calepin-syntax-scope-3">Рисуем прямоугольник</span><span class="calepin-syntax-scope-4">"</span>)
+
+</code></pre></div><p>Единый интерфейс, но разное поведение объектов <code>shapes</code>:</p><div class="sourceCode" data-lang="python"><pre><code data-lang="python">shapes<span class="calepin-syntax-scope-26">:</span> <span class="calepin-syntax-scope-17">list</span>[Shape] <span class="calepin-syntax-scope-27">=</span> [<span class="calepin-syntax-scope-22">Circle</span>()<span class="calepin-syntax-scope-26">,</span> <span class="calepin-syntax-scope-22">Rectangle</span>()]
+<span class="calepin-syntax-scope-10">for</span> shape <span class="calepin-syntax-scope-10">in</span> shapes:
+    shape.<span class="calepin-syntax-scope-22">draw</span>()
+</code></pre></div><div class="cell-output cell-output-stdout"><pre><code>Рисуем круг
+Рисуем прямоугольник</code></pre></div><h3 id="section-3">Утиная типизация</h3><p>В Python наследование от общего базового класса вовсе не обязательно. Главный принцип динамической утиной типизации гласит: если объект поддерживает необходимый метод или операцию, не имеет значения, к какому классу он принадлежит.</p><div class="sourceCode" data-lang="python"><pre><code data-lang="python"><span class="calepin-syntax-scope-6">class</span> <span class="calepin-syntax-scope-15">Document</span>:
+    <span class="calepin-syntax-scope-6">def</span> <span class="calepin-syntax-scope-20">render</span>(<span class="calepin-syntax-scope-28">self</span>) <span class="calepin-syntax-scope-26">-></span> <span class="calepin-syntax-scope-11">None</span>:
+        <span class="calepin-syntax-scope-21">print</span>(<span class="calepin-syntax-scope-4">"</span><span class="calepin-syntax-scope-3">Рендеринг документа...</span><span class="calepin-syntax-scope-4">"</span>)
+
+<span class="calepin-syntax-scope-6">class</span> <span class="calepin-syntax-scope-15">Image</span>:
+    <span class="calepin-syntax-scope-6">def</span> <span class="calepin-syntax-scope-20">render</span>(<span class="calepin-syntax-scope-28">self</span>) <span class="calepin-syntax-scope-26">-></span> <span class="calepin-syntax-scope-11">None</span>:
+        <span class="calepin-syntax-scope-21">print</span>(<span class="calepin-syntax-scope-4">"</span><span class="calepin-syntax-scope-3">Отображение картинки...</span><span class="calepin-syntax-scope-4">"</span>)
+
+<span class="calepin-syntax-scope-6">def</span> <span class="calepin-syntax-scope-20">display</span>(<span class="calepin-syntax-scope-28">printable_object</span>) <span class="calepin-syntax-scope-26">-></span> <span class="calepin-syntax-scope-11">None</span>:
+    printable_object.<span class="calepin-syntax-scope-22">render</span>()
+</code></pre></div><p>И такие вызовы работают без общего родительского класса:</p><div class="sourceCode" data-lang="python"><pre><code data-lang="python"><span class="calepin-syntax-scope-22">display</span>(<span class="calepin-syntax-scope-22">Document</span>())</code></pre></div><div class="cell-output cell-output-stdout"><pre><code>Рендеринг документа...</code></pre></div><div class="sourceCode" data-lang="python"><pre><code data-lang="python"><span class="calepin-syntax-scope-22">display</span>(<span class="calepin-syntax-scope-22">Image</span>())</code></pre></div><div class="cell-output cell-output-stdout"><pre><code>Отображение картинки...</code></pre></div><p>Среда выполнения Python проверяет наличие и поддержку операций объектом непосредственно в момент выполнения</p><h3 id="section-4">Статическая утиная типизация</h3><p>Чтобы сохранить гибкость утиной типизации и при этом дать возможность статическим анализаторам (таким как Mypy) проверять типы до запуска программы, в Python используются протоколы из модуля <code>typing</code></p><div class="sourceCode" data-lang="python"><pre><code data-lang="python"><span class="calepin-syntax-scope-10">from</span> typing <span class="calepin-syntax-scope-10">import</span> Protocol
+
+<span class="calepin-syntax-scope-6">class</span> <span class="calepin-syntax-scope-15">Renderable</span>(Protocol):
+    <span class="calepin-syntax-scope-6">def</span> <span class="calepin-syntax-scope-20">render</span>(<span class="calepin-syntax-scope-28">self</span>) <span class="calepin-syntax-scope-26">-></span> <span class="calepin-syntax-scope-11">None</span>: <span class="calepin-syntax-scope-11">...</span>
+
+<span class="calepin-syntax-scope-6">class</span> <span class="calepin-syntax-scope-15">WebPage</span>:
+    <span class="calepin-syntax-scope-6">def</span> <span class="calepin-syntax-scope-20">render</span>(<span class="calepin-syntax-scope-28">self</span>) <span class="calepin-syntax-scope-26">-></span> <span class="calepin-syntax-scope-11">None</span>:
+        <span class="calepin-syntax-scope-21">print</span>(<span class="calepin-syntax-scope-4">"</span><span class="calepin-syntax-scope-3">Отображение веб-страницы</span><span class="calepin-syntax-scope-4">"</span>)
+
+<span class="calepin-syntax-scope-6">def</span> <span class="calepin-syntax-scope-20">render_element</span>(<span class="calepin-syntax-scope-28">element</span><span class="calepin-syntax-scope-26">:</span> Renderable) <span class="calepin-syntax-scope-26">-></span> <span class="calepin-syntax-scope-11">None</span>:
+    element.<span class="calepin-syntax-scope-22">render</span>()
+
+<span class="calepin-syntax-scope-22">render_element</span>(<span class="calepin-syntax-scope-22">WebPage</span>())
+</code></pre></div><div class="cell-output cell-output-stdout"><pre><code>Отображение веб-страницы</code></pre></div><p>Классу не требуется явно объявлять наследование от протокола — достаточно просто реализовать совпадающие методы</p><h3 id="section-5">Гусиная типизация</h3><p>Когда необходимо явно зафиксировать контракт интерфейса во время выполнения, используется проверка принадлежности к абстрактным базовым классам (ABC) с помощью</p><div class="sourceCode" data-lang="python"><pre><code data-lang="python"><span class="calepin-syntax-scope-10">from</span> collections.abc <span class="calepin-syntax-scope-10">import</span> Iterable
+
+<span class="calepin-syntax-scope-6">def</span> <span class="calepin-syntax-scope-20">process_items</span>(<span class="calepin-syntax-scope-28">items</span><span class="calepin-syntax-scope-26">:</span> Iterable) <span class="calepin-syntax-scope-26">-></span> <span class="calepin-syntax-scope-11">None</span>:
+    <span class="calepin-syntax-scope-10">if</span> <span class="calepin-syntax-scope-21">isinstance</span>(items<span class="calepin-syntax-scope-26">,</span> Iterable):
+        <span class="calepin-syntax-scope-10">for</span> item <span class="calepin-syntax-scope-10">in</span> items:
+            <span class="calepin-syntax-scope-21">print</span>(item)
+</code></pre></div><p>Проверка через ABC разрешает полиморфизм для любых итерируемых объектов</p><p>Это позволяет проверять соответствие интерфейсу, сохраняя полиморфизм для любых совместимых классов или зарегистрированных виртуальных подклассов</p><h3 id="section-6">Одиночная диспетчеризация</h3><p>Полиморфизм на уровне отдельных функций позволяет выполнять разный код в зависимости от типа переданного аргумента во время выполнения</p><div class="sourceCode" data-lang="python"><pre><code data-lang="python"><span class="calepin-syntax-scope-10">from</span> functools <span class="calepin-syntax-scope-10">import</span> singledispatch
+
+<span class="calepin-syntax-scope-25">@</span>singledispatch
+<span class="calepin-syntax-scope-6">def</span> <span class="calepin-syntax-scope-20">process</span>(<span class="calepin-syntax-scope-28">data</span>) <span class="calepin-syntax-scope-26">-></span> <span class="calepin-syntax-scope-11">None</span>:
+    <span class="calepin-syntax-scope-21">print</span>(<span class="calepin-syntax-scope-8">f</span><span class="calepin-syntax-scope-4">"</span><span class="calepin-syntax-scope-3">Базовая обработка: </span>{data}<span class="calepin-syntax-scope-4">"</span>)
+
+<span class="calepin-syntax-scope-25">@</span>process.register(<span class="calepin-syntax-scope-17">int</span>)
+<span class="calepin-syntax-scope-6">def</span> <span class="calepin-syntax-scope-20">_</span>(<span class="calepin-syntax-scope-28">data</span><span class="calepin-syntax-scope-26">:</span> <span class="calepin-syntax-scope-17">int</span>) <span class="calepin-syntax-scope-26">-></span> <span class="calepin-syntax-scope-11">None</span>:
+    <span class="calepin-syntax-scope-21">print</span>(<span class="calepin-syntax-scope-8">f</span><span class="calepin-syntax-scope-4">"</span><span class="calepin-syntax-scope-3">Числовая обработка: </span>{data <span class="calepin-syntax-scope-24">*</span> <span class="calepin-syntax-scope-23">2</span>}<span class="calepin-syntax-scope-4">"</span>)
+
+<span class="calepin-syntax-scope-25">@</span>process.register(<span class="calepin-syntax-scope-17">list</span>)
+<span class="calepin-syntax-scope-6">def</span> <span class="calepin-syntax-scope-20">_</span>(<span class="calepin-syntax-scope-28">data</span><span class="calepin-syntax-scope-26">:</span> <span class="calepin-syntax-scope-17">list</span>) <span class="calepin-syntax-scope-26">-></span> <span class="calepin-syntax-scope-11">None</span>:
+    <span class="calepin-syntax-scope-21">print</span>(<span class="calepin-syntax-scope-8">f</span><span class="calepin-syntax-scope-4">"</span><span class="calepin-syntax-scope-3">Список из </span>{<span class="calepin-syntax-scope-21">len</span>(data)}<span class="calepin-syntax-scope-3"> элементов</span><span class="calepin-syntax-scope-4">"</span>)
+
+<span class="calepin-syntax-scope-22">process</span>(<span class="calepin-syntax-scope-4">"</span><span class="calepin-syntax-scope-3">текст</span><span class="calepin-syntax-scope-4">"</span>)</code></pre></div><div class="cell-output cell-output-stdout"><pre><code>Базовая обработка: текст</code></pre></div><div class="sourceCode" data-lang="python"><pre><code data-lang="python"><span class="calepin-syntax-scope-22">process</span>(<span class="calepin-syntax-scope-23">10</span>)</code></pre></div><div class="cell-output cell-output-stdout"><pre><code>Числовая обработка: 20</code></pre></div><div class="sourceCode" data-lang="python"><pre><code data-lang="python"><span class="calepin-syntax-scope-22">process</span>([<span class="calepin-syntax-scope-23">23</span><span class="calepin-syntax-scope-26">,</span> <span class="calepin-syntax-scope-23">24</span>])</code></pre></div><div class="cell-output cell-output-stdout"><pre><code>Список из 2 элементов</code></pre></div><p>Такой подход облегчает модульное расширение программы без раздувания цепочек <code>if/elif</code> или изменения существующих классов</p><section role="doc-endnotes"><ol style="list-style-type: none"><li id="loc-2"><sup role="doc-backlink"><a href="#loc-1">1</a></sup>определение из лекции по ООП от 10.10.26</li><li id="loc-3"><sup role="doc-backlink"><a href="#oop">2</a></sup>Объектно-ориентированное мышление – Мэтт Вайсфельд</li></ol></section>
         </main>
                 
+        <aside class="calepin-website-toc is-floating">
+            <p class="calepin-website-toc-title">On this page</p>
+            <nav aria-label="On this page">
+                <ul>
+                    
+                    <li class="level-3"><a href="#section-2">Классический полиморфизм через наследование и переопределение методов</a></li>
+                    
+                    <li class="level-3"><a href="#section-3">Утиная типизация</a></li>
+                    
+                    <li class="level-3"><a href="#section-4">Статическая утиная типизация</a></li>
+                    
+                    <li class="level-3"><a href="#section-5">Гусиная типизация</a></li>
+                    
+                    <li class="level-3"><a href="#section-6">Одиночная диспетчеризация</a></li>
+                    
+                </ul>
+            </nav>
+        </aside>
+        
     </div>
     
     
+    
+        
+        
+        
+            
+        
+        
     
         
         

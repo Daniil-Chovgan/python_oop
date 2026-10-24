@@ -4,9 +4,9 @@
     
     
     
-    <meta name="description" content="Об особенностях принципов ООП в языке python">
-    <meta property="og:description" content="Об особенностях принципов ООП в языке python">
-    <meta name="twitter:description" content="Об особенностях принципов ООП в языке python">
+    <meta name="description" content="При проектировании языка python исходили из концепции: &quot;все мы взрослые люди&quot;. Поэтому в python нет классических public, protect и private полей.">
+    <meta property="og:description" content="При проектировании языка python исходили из концепции: &quot;все мы взрослые люди&quot;. Поэтому в python нет классических public, protect и private полей.">
+    <meta name="twitter:description" content="При проектировании языка python исходили из концепции: &quot;все мы взрослые люди&quot;. Поэтому в python нет классических public, protect и private полей.">
     
     
     
@@ -2837,7 +2837,7 @@ html:not([data-theme]) {
     <script src="../../pagefind/pagefind-component-ui.js" type="module"></script>
 
 
-<script id="calepin-website-source-data" type="application/json">"#import \"/.calepin/calepin.typ\" as calepin\n\n#set document(title: [Инкапсуляция])\n#metadata((title: \"Инкапсуляция\", translation_key: \"encapsulation\")) \u003cwebsite-metadata\u003e\n\n#calepin.setup(\n  echo: true,\n  eval: true,\n  results: \"verbatim\",\n  fenced-chunks: true,\n)\n\n#let target = sys.inputs.at(\"calepin-target\", default: \"paged\")\n\n#show: body =\u003e {\n  if target == \"html\" {\n    show \u003ccalepin-input\u003e: it =\u003e it.body\n    body\n  } else {\n    import \"@preview/codly:1.3.0\": *\n    import \"@preview/codly-languages:0.1.10\": *\n    show: codly-init\n    show: calepin.document\n    codly(languages: codly-languages)\n    codly(number-format: none)\n    show \u003ccalepin-input\u003e: it =\u003e it.body\n    set raw(theme: \"/.calepin/syntax.tmTheme\")\n    body\n  }\n}\n\n#calepin.setup(echo: true)\n\n#title()\n\n\n#calepin.elements.card[\n*Инкапсуляция* -- данные и методы которые существуют внутри класса, отделенные от интерфейса, объединенные в единое целое.#footnote[определение из лекции по ООП от 10.10.26]\n]\n\n#calepin.elements.card[\n*Инкапсуляция* -- Один объект будет содержать как свои данные, так и поведения, и сможет скрыть то, что ему потребуется, от других объектов.#footnote[Объектно-ориентированное мышление -- Мэтт Вайсфельд] \u003coop\u003e\n]\n\n#calepin.elements.card[\n*Сокрытие* -- защищенные данные от изменений извне.#footnote[определение из лекции по ООП от 10.10.26]\n]\n\n*Уровни:*\n  - `private` - доступны исключительно классу\n  - `protect` - доступны наследникам, но не доступно извне\n  - `public` - доступны извне\n"</script>
+<script id="calepin-website-source-data" type="application/json">"#import \"/.calepin/calepin.typ\" as calepin\n\n#set document(title: [Инкапсуляция])\n#metadata((title: \"Инкапсуляция\", translation_key: \"encapsulation\")) \u003cwebsite-metadata\u003e\n\n#calepin.setup(\n  echo: true,\n  eval: true,\n  results: \"verbatim\",\n  fenced-chunks: true,\n)\n\n#let target = sys.inputs.at(\"calepin-target\", default: \"paged\")\n\n#show: body =\u003e {\n  if target == \"html\" {\n    show \u003ccalepin-input\u003e: it =\u003e it.body\n    body\n  } else {\n    import \"@preview/codly:1.3.0\": *\n    import \"@preview/codly-languages:0.1.10\": *\n    show: codly-init\n    show: calepin.document\n    codly(languages: codly-languages)\n    codly(number-format: none)\n    show \u003ccalepin-input\u003e: it =\u003e it.body\n    set raw(theme: \"/.calepin/syntax.tmTheme\")\n    body\n  }\n}\n\n#calepin.setup(echo: true)\n\n#title()\n\n#calepin.elements.card[\n*Инкапсуляция* -- данные и методы которые существуют внутри класса, отделенные от интерфейса, объединенные в единое целое.#footnote[определение из лекции по ООП от 10.10.26]\u003coop\u003e\n]\n\n#calepin.elements.card[\n*Инкапсуляция* -- Один объект будет содержать как свои данные, так и поведения, и сможет скрыть то, что ему потребуется, от других объектов.#footnote[Объектно-ориентированное мышление -- Мэтт Вайсфельд]\n]\n\n*Уровни:*\n  - `private` - доступны исключительно классу\n  - `protect` - доступны наследникам, но не доступно извне\n  - `public` - доступны извне\n\n== Сокрытие\n#calepin.elements.card[\n*Сокрытие* -- защищенные данные от изменений извне.@oop\n]\n\nПри проектировании языка python исходили из концепции: \"все мы взрослые люди\".\nПоэтому в python нет классических `public`, `protect` и `private` полей.\n\nОднако вместо этого есть соглашение о наименовании доступов. И #link(\"https://peps.python.org/pep-0008/\")[PEP 8] они описываются так:\n\n- `_single_leading_underscore`: слабый индикатор \"внутреннего использования\". Например, `from M import *` не импортирует объекты, имена которых начинаются с подчеркивания.\n- `single_trailing_underscore_`: используется по соглашению во избежание конфликтов с ключевым словом Python, например:\n- `tkinter.Toplevel(master, class_='ClassName')`\n- `__double_leading_underscore`: при именовании атрибута класса вызывает искажение имени (внутри класса FooBar `__boo` становится `_FooBar__boo`; см. ниже).\n- `__double_leading_and_trailing_underscore__`: «магические» объекты или атрибуты, которые находятся в управляемых пользователем пространствах имен. Например, `__init__`, `__import__` или `__file__`. Никогда не придумывайте такие имена; используйте их только в соответствии с документацией.\n"</script>
 </head><body>
 
     <header class="calepin-website-topbar calepin-site-topbar">
@@ -2935,6 +2935,10 @@ html:not([data-theme]) {
 <li class="calepin-website-sidebar-link"><a href="../../base_terms.html" aria-label="Основные понятия">Основные понятия</a></li>
 
     
+    
+<li class="calepin-website-sidebar-link"><a href="../../program_design/program_design.html" aria-label="Основы проектирования">Основы проектирования</a></li>
+
+    
 </ul>
 
 
@@ -2988,12 +2992,30 @@ html:not([data-theme]) {
             </nav>
         </aside>
         <main class="calepin-website-main calepin-content" data-pagefind-body>
-            <h1 id="section">Инкапсуляция</h1><article class="calepin-elements-card" style="display: block; margin-block: 1rem; padding: 1rem; overflow: hidden; border: 1px solid var(--pico-muted-border-color); border-radius: 0.8rem; background: var(--pico-background-color); color: var(--pico-color); box-shadow: 0 0.65rem 1.5rem rgba(15, 23, 42, 0.08); max-width: 100%;"><strong>Инкапсуляция</strong> – данные и методы которые существуют внутри класса, отделенные от интерфейса, объединенные в единое целое.<sup id="loc-1" role="doc-noteref"><a href="#loc-3">1</a></sup></article><article class="calepin-elements-card" style="display: block; margin-block: 1rem; padding: 1rem; overflow: hidden; border: 1px solid var(--pico-muted-border-color); border-radius: 0.8rem; background: var(--pico-background-color); color: var(--pico-color); box-shadow: 0 0.65rem 1.5rem rgba(15, 23, 42, 0.08); max-width: 100%;"><strong>Инкапсуляция</strong> – Один объект будет содержать как свои данные, так и поведения, и сможет скрыть то, что ему потребуется, от других объектов.<sup id="oop" role="doc-noteref"><a href="#loc-4">2</a></sup></article><article class="calepin-elements-card" style="display: block; margin-block: 1rem; padding: 1rem; overflow: hidden; border: 1px solid var(--pico-muted-border-color); border-radius: 0.8rem; background: var(--pico-background-color); color: var(--pico-color); box-shadow: 0 0.65rem 1.5rem rgba(15, 23, 42, 0.08); max-width: 100%;"><strong>Сокрытие</strong> – защищенные данные от изменений извне.<sup id="loc-2" role="doc-noteref"><a href="#loc-5">3</a></sup></article><p><strong>Уровни:</strong></p><ul><li><code>private</code> - доступны исключительно классу</li><li><code>protect</code> - доступны наследникам, но не доступно извне</li><li><code>public</code> - доступны извне</li></ul><section role="doc-endnotes"><ol style="list-style-type: none"><li id="loc-3"><sup role="doc-backlink"><a href="#loc-1">1</a></sup>определение из лекции по ООП от 10.10.26</li><li id="loc-4"><sup role="doc-backlink"><a href="#oop">2</a></sup>Объектно-ориентированное мышление – Мэтт Вайсфельд</li><li id="loc-5"><sup role="doc-backlink"><a href="#loc-2">3</a></sup>определение из лекции по ООП от 10.10.26</li></ol></section>
+            <h1 id="section">Инкапсуляция</h1><article class="calepin-elements-card" style="display: block; margin-block: 1rem; padding: 1rem; overflow: hidden; border: 1px solid var(--pico-muted-border-color); border-radius: 0.8rem; background: var(--pico-background-color); color: var(--pico-color); box-shadow: 0 0.65rem 1.5rem rgba(15, 23, 42, 0.08); max-width: 100%;"><strong>Инкапсуляция</strong> – данные и методы которые существуют внутри класса, отделенные от интерфейса, объединенные в единое целое.<sup id="oop" role="doc-noteref"><a href="#loc-2">1</a></sup></article><article class="calepin-elements-card" style="display: block; margin-block: 1rem; padding: 1rem; overflow: hidden; border: 1px solid var(--pico-muted-border-color); border-radius: 0.8rem; background: var(--pico-background-color); color: var(--pico-color); box-shadow: 0 0.65rem 1.5rem rgba(15, 23, 42, 0.08); max-width: 100%;"><strong>Инкапсуляция</strong> – Один объект будет содержать как свои данные, так и поведения, и сможет скрыть то, что ему потребуется, от других объектов.<sup id="loc-1" role="doc-noteref"><a href="#loc-3">2</a></sup></article><p><strong>Уровни:</strong></p><ul><li><code>private</code> - доступны исключительно классу</li><li><code>protect</code> - доступны наследникам, но не доступно извне</li><li><code>public</code> - доступны извне</li></ul><h3 id="section-2">Сокрытие</h3><article class="calepin-elements-card" style="display: block; margin-block: 1rem; padding: 1rem; overflow: hidden; border: 1px solid var(--pico-muted-border-color); border-radius: 0.8rem; background: var(--pico-background-color); color: var(--pico-color); box-shadow: 0 0.65rem 1.5rem rgba(15, 23, 42, 0.08); max-width: 100%;"><strong>Сокрытие</strong> – защищенные данные от изменений извне.<sup role="doc-noteref"><a href="#loc-2">1</a></sup></article><p>При проектировании языка python исходили из концепции: “все мы взрослые люди”. Поэтому в python нет классических <code>public</code>, <code>protect</code> и <code>private</code> полей.</p><p>Однако вместо этого есть соглашение о наименовании доступов. И <a href="https://peps.python.org/pep-0008/">PEP 8</a> они описываются так:</p><ul><li><code>_single_leading_underscore</code>: слабый индикатор “внутреннего использования”. Например, <code>from M import *</code> не импортирует объекты, имена которых начинаются с подчеркивания.</li><li><code>single_trailing_underscore_</code>: используется по соглашению во избежание конфликтов с ключевым словом Python, например:</li><li><code>tkinter.Toplevel(master, class_='ClassName')</code></li><li><code>__double_leading_underscore</code>: при именовании атрибута класса вызывает искажение имени (внутри класса FooBar <code>__boo</code> становится <code>_FooBar__boo</code>; см. ниже).</li><li><code>__double_leading_and_trailing_underscore__</code>: «магические» объекты или атрибуты, которые находятся в управляемых пользователем пространствах имен. Например, <code>__init__</code>, <code>__import__</code> или <code>__file__</code>. Никогда не придумывайте такие имена; используйте их только в соответствии с документацией.</li></ul><section role="doc-endnotes"><ol style="list-style-type: none"><li id="loc-2"><sup role="doc-backlink"><a href="#oop">1</a></sup>определение из лекции по ООП от 10.10.26</li><li id="loc-3"><sup role="doc-backlink"><a href="#loc-1">2</a></sup>Объектно-ориентированное мышление – Мэтт Вайсфельд</li></ol></section>
         </main>
                 
+        <aside class="calepin-website-toc is-floating">
+            <p class="calepin-website-toc-title">On this page</p>
+            <nav aria-label="On this page">
+                <ul>
+                    
+                    <li class="level-3"><a href="#section-2">Сокрытие</a></li>
+                    
+                </ul>
+            </nav>
+        </aside>
+        
     </div>
     
     
+    
+        
+        
+        
+            
+        
+        
     
         
         
@@ -3060,11 +3082,11 @@ html:not([data-theme]) {
     <footer class="calepin-website-page-nav" aria-label="Page navigation">
       <div class="calepin-website-page-nav-inner">
         
-        <a class="calepin-website-page-nav-link calepin-website-page-nav-link--prev outline secondary" href="../../base_terms.html" role="button">
+        <a class="calepin-website-page-nav-link calepin-website-page-nav-link--prev outline secondary" href="../../program_design/program_design.html" role="button">
           <span class="calepin-website-page-nav-arrow" aria-hidden="true">&larr;</span>
           <span class="calepin-website-page-nav-content">
             <span class="calepin-website-page-nav-kind">Previous</span>
-            <span class="calepin-website-page-nav-title">Основные понятия</span>
+            <span class="calepin-website-page-nav-title">Основы проектирования</span>
           </span>
         </a>
         
