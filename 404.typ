@@ -1,5 +1,5 @@
-#set document(title: [Not found])
+#set document(title: [Страница не найдена])
 
 #title()
 
-The requested page does not exist.
+Простите, этой страницы не существует

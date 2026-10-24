@@ -1,9 +1,8 @@
+#import "@preview/cades:0.3.1": qr-code
 #import "/.calepin/calepin.typ" as calepin
-#import "@preview/codly:1.3.0": *
-#import "@preview/codly-languages:0.1.10": *
 
 #set document(title: [Объектно-ориентированное программирование в python])
-#metadata((title: "Home", translation_key: "home")) <website-metadata>
+#metadata((title: "Вступление", translation_key: "start")) <website-metadata>
 
 #calepin.setup(
   echo: true,
@@ -17,53 +16,34 @@
 
 #show: body => {
   if target == "html" {
+    show <calepin-input>: it => it.body
     body
   } else {
-    // set page(columns: 2)
+    import "@preview/codly:1.3.0": *
+    import "@preview/codly-languages:0.1.10": *
     show: codly-init
     show: calepin.document
     codly(languages: codly-languages)
-    // Hand the code to codly, and drop Calepin's own box from around it.
+    codly(number-format: none)
     show <calepin-input>: it => it.body
-    // Give codly the same palette Calepin paints executed chunks with, so the
-    // plain fence below matches the chunk above it.
     set raw(theme: "/.calepin/syntax.tmTheme")
-
-
     body
   }
 }
 
-
-
 #calepin.setup(echo: true)
-
-
-
-// #if target == "html" {
-//   html.elem("img", "", attrs: (
-//     class: "calepin-float-right calepin-scaffold-portrait",
-//     src: "assets/portrait.jpg",
-//     alt: "Portrait photograph",
-//     width: "1280",
-//     height: "1920",
-//     loading: "lazy",
-//     decoding: "async",
-//   ))
-// } else {
-//   place(
-//     top + right,
-//     float: true,
-//     clearance: 1em,
-//     image("/assets/portrait.jpg", width: 32%),
-//   )
-// }
-
 
 #title()
 
-== Класс
+Этот сайт посвящен особенностям ООП в python. Для открытия у себя на устройстве можете отсканировать qr:
+#figure(
+  qr-code(
+    "https://daniil-chovgan.github.io/python_oop/",
+    width: 5cm
+  )
+)
 
+== Класс
 Python сильно более объектно ориентирован, чем многие языки. Почти все что вы встретите в python будет объектом.\
 Функции, числа, классы, модули - это все объекты.
 
@@ -180,8 +160,9 @@ b.a
 ```python
 b.b = "Новый аттрибут"
 b.b
+```
 
-
+```python
 def func(num):
     print(f"Новый метод №{num}")
 
@@ -191,51 +172,14 @@ b.c(1)
 
 При этом вызвать новый метод будет именно методом конкретного объекта:
 ```python
-#| eval: false
+#| error: true
 a.b
 a.c(2)
 ```
-Такой код вызывает ошибку.
+
 
 Такой подход позволяет реализовывать активную интроспекцию и рефлексию, меняя, добавляя и удаляя поля в рантайме.
 
-
-
-
-== Наследование
-
-По большому сче2ту принцип наследования можно свести к дополнительному способу доступа к атрибутам.
-
-В python наследование организуется через добавление класса родителя в `__mro__` и `__bases__`\
-Если кратко, то `__bases__` хранит в себе классы своих родителей, а `__mro__` линейный список всех своих предков.
-
-К примеру:
-
-```python
-class A: ...
-class B: ...
-class C(A, B): ...
-
-C.__bases__
-C.__mro__
-```
-
-А так же в python существует метод , благодаря которому можно добавить в качестве базового класса объект.\
-Так же в python в качестве предка можно использовать любой объект с помощью метода `__mro_entries__`. Он принимает `tuple` из всех базовых классов наследника и возвращает `tuple` из классов (то есть экземпляров `type`)
-
-К примеру отнаследуемся от функции:
-```python
-def my_func():
-    print('called')
-my_func.__mro_entries__ = lambda bases: (str,)
-
-class MyStr(my_func): ...
-
-print(MyStr.__mro__)
-print(MyStr('abc'))
-```
-
-И нам на самом деле ничего не мешает изменить, дополнить, удалить предка наследуемого класса
 
 == Инкапсуляция
 
@@ -284,7 +228,7 @@ class MyClass(MySuperClass, MyMixin):
 
 MyClass()
 ```
-С помощью конструктора type мы можем создать MyClass во время выполнения:
+С помощью конструктора `type` мы можем создать `MyClass` во время выполнения:
 ```python
 MyClass = type('MyClass',
         (MySuperClass, MyMixin),
@@ -294,8 +238,9 @@ MyClass = type('MyClass',
 MyClass()
 ```
 
-
 // TODO: Рассказать про алгоритм с точки зрения математики.
 // TODO: Рассказать об особенностях выделения, освобождения и зачистки памяти спецефически для объектов в python
 // TODO: `__dict__` и `__slots__`
-//
+
+
+// #| results-location: chunk

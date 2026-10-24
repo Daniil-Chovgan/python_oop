@@ -1,12 +1,12 @@
 
 
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Not found</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Страница не найдена</title>
     
     
     
-    <meta name="description" content="The requested page does not exist.">
-    <meta property="og:description" content="The requested page does not exist.">
-    <meta name="twitter:description" content="The requested page does not exist.">
+    <meta name="description" content="Простите, этой страницы не существует">
+    <meta property="og:description" content="Простите, этой страницы не существует">
+    <meta name="twitter:description" content="Простите, этой страницы не существует">
     
     
     
@@ -17,8 +17,8 @@
     
     
     
-    <meta property="og:title" content="Not found | ООП в python">
-    <meta name="twitter:title" content="Not found | ООП в python">
+    <meta property="og:title" content="Страница не найдена | ООП в python">
+    <meta name="twitter:title" content="Страница не найдена | ООП в python">
     
     
     <meta property="og:type" content="article">
@@ -2822,8 +2822,22 @@ html:not([data-theme]) {
 
 
 
+    <link rel="stylesheet" href="/pagefind/pagefind-component-ui.css">
+    <pagefind-config bundle-path="/pagefind/"></pagefind-config>
+    <script>
+      (() => {
+        const config = document.querySelector("pagefind-config[bundle-path]");
+        if (config) {
+          let bundlePath = config.getAttribute("bundle-path") || "";
+          if (bundlePath && !bundlePath.endsWith("/")) bundlePath += "/";
+          config.setAttribute("bundle-path", new URL(bundlePath, window.location.href).toString());
+        }
+      })();
+    </script>
+    <script src="/pagefind/pagefind-component-ui.js" type="module"></script>
 
-<script id="calepin-website-source-data" type="application/json">"#set document(title: [Not found])\n\n#title()\n\nThe requested page does not exist.\n"</script>
+
+<script id="calepin-website-source-data" type="application/json">"#set document(title: [Страница не найдена])\n\n#title()\n\nПростите, этой страницы не существует\n"</script>
 </head><body>
 
     <header class="calepin-website-topbar calepin-site-topbar">
@@ -2853,6 +2867,16 @@ html:not([data-theme]) {
                     <button class="calepin-site-theme-toggle" type="button" aria-label="Theme" title="Theme" data-calepin-theme-toggle data-calepin-theme-storage-key="calepin-website-theme" data-calepin-theme-param="theme">Theme</button>
                 </li>
                 
+                
+                <li class="calepin-website-search-item">
+                    <form class="calepin-website-search" role="search" data-calepin-search-form>
+                        <input class="calepin-website-search-input" type="search" placeholder="Search" aria-label="Search documentation" aria-haspopup="listbox" aria-expanded="false" autocomplete="off" spellcheck="false" data-calepin-search-input>
+                        <div class="calepin-website-search-results" role="listbox" aria-label="Search results" hidden data-calepin-search-results></div>
+                    </form>
+                </li>
+                <li class="calepin-website-mobile-search-item">
+                    <button class="calepin-website-mobile-search-button outline secondary" type="button" aria-label="Search documentation" title="Search" data-calepin-mobile-search-trigger><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg></button>
+                </li>
                 
                 
                 <li class="calepin-website-view-mode-item">
@@ -2904,7 +2928,11 @@ html:not([data-theme]) {
 <ul>
     
     
-<li class="calepin-website-sidebar-link"><a href="/index.html" aria-label="Home">Home</a></li>
+<li class="calepin-website-sidebar-link"><a href="/index.html" aria-label="Вступление">Вступление</a></li>
+
+    
+    
+<li class="calepin-website-sidebar-link"><a href="/base_terms.html" aria-label="Основные понятия">Основные понятия</a></li>
 
     
 </ul>
@@ -2919,13 +2947,33 @@ html:not([data-theme]) {
 
 
 <details class="calepin-website-sidebar-section" data-calepin-sidebar-depth="0">
-    <summary>Наследование</summary>
+    <summary>Принципы ООП</summary>
 
 
 <ul>
     
     
-<li class="calepin-website-sidebar-link"><a href="/mro/mro.html" aria-label="MRO">MRO</a></li>
+<li class="calepin-website-sidebar-link"><a href="/principales/encapsulation/term.html" aria-label="Инкапсуляция">Инкапсуляция</a></li>
+
+    
+    
+<li class="calepin-website-sidebar-link"><a href="/principales/inheritance/term.html" aria-label="Наследование">Наследование</a></li>
+
+    
+    
+<li class="calepin-website-sidebar-link"><a href="/principales/polymorphism/term.html" aria-label="Полиморфизм">Полиморфизм</a></li>
+
+    
+    
+<li class="calepin-website-sidebar-link"><a href="/principales/abstraction/term.html" aria-label="Абстракция">Абстракция</a></li>
+
+    
+    
+<li class="calepin-website-sidebar-link"><a href="/principales/inheritance/mro/mro.html" aria-label="MRO">MRO</a></li>
+
+    
+    
+<li class="calepin-website-sidebar-link"><a href="/principales/relations/relations.html" aria-label="Отношения элементов">Отношения элементов</a></li>
 
     
 </ul>
@@ -2940,7 +2988,7 @@ html:not([data-theme]) {
             </nav>
         </aside>
         <main class="calepin-website-main calepin-content" data-pagefind-body>
-            <h1 id="not-found">Not found</h1><p>The requested page does not exist.</p>
+            <h1 id="section">Страница не найдена</h1><p>Простите, этой страницы не существует</p>
         </main>
                 
     </div>
@@ -2961,12 +3009,56 @@ html:not([data-theme]) {
         
         
     
+        
+        
+        
+            
+        
+        
+    
+        
+        
+        
+            
+        
+        
+    
+        
+        
+        
+            
+        
+        
+    
+        
+        
+        
+            
+        
+        
+    
+        
+        
+        
+            
+        
+        
+    
+        
+        
+        
+            
+        
+        
+    
 
     
     
 
 
 
+
+    <pagefind-modal></pagefind-modal>
 
 
     <script>

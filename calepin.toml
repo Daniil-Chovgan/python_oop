@@ -8,23 +8,17 @@ theme = "calepin"
 pdf = true
 default-language = "ru"
 
-# Uncomment to generate static search if Pagefind is available.
-# search = "pagefind"
+search = "pagefind"
+
+llms = false
+robots = false
 
 # Uncomment to generate web feeds after setting base-url.
 # feeds = true
 
-# [languages.en]
-# label = "English"
-# content-dir = "fr"
-
 [languages.ru]
 label = "Русский"
 content-dir = "."
-
-# [languages.fr]
-# label = "Français"
-# content-dir = "fr"
 
 [static]
 include = ["assets/**"]
@@ -65,15 +59,30 @@ title = "Начало"
   [[sidebar.section.item]]
   target = "index.typ"
 
+  [[sidebar.section.item]]
+  target = "base_terms.typ"
   # [[sidebar.section.item]]
   # target = "about.typ"
 
 [[sidebar.section]]
-title = "Наследование"
+title = "Принципы ООП"
 
   [[sidebar.section.item]]
-  target = "mro/mro.typ"
-#
+  target = "principales/encapsulation/term.typ"
+  [[sidebar.section.item]]
+  target = "principales/inheritance/term.typ"
+  [[sidebar.section.item]]
+  target = "principales/polymorphism/term.typ"
+  [[sidebar.section.item]]
+  target = "principales/abstraction/term.typ"
+
+  [[sidebar.section.item]]
+  target = "principales/inheritance/mro/mro.typ"
+  [[sidebar.section.item]]
+  target = "principales/relations/relations.typ"
+
+
+
 #   [[sidebar.section.item]]
 #   target = "guide/writing.typ"
 
