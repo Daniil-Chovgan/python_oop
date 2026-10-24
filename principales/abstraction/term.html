@@ -4,9 +4,9 @@
     
     
     
-    <meta name="description" content="Об особенностях принципов ООП в языке python">
-    <meta property="og:description" content="Об особенностях принципов ООП в языке python">
-    <meta name="twitter:description" content="Об особенностях принципов ООП в языке python">
+    <meta name="description" content="В Python абстракция реализуется с помощью встроенного модуля ABC (Abstract Base Classes):">
+    <meta property="og:description" content="В Python абстракция реализуется с помощью встроенного модуля ABC (Abstract Base Classes):">
+    <meta name="twitter:description" content="В Python абстракция реализуется с помощью встроенного модуля ABC (Abstract Base Classes):">
     
     
     
@@ -2837,7 +2837,7 @@ html:not([data-theme]) {
     <script src="../../pagefind/pagefind-component-ui.js" type="module"></script>
 
 
-<script id="calepin-website-source-data" type="application/json">"#import \"/.calepin/calepin.typ\" as calepin\n\n#set document(title: [Абстракция])\n#metadata((title: \"Абстракция\", translation_key: \"abstraction\")) \u003cwebsite-metadata\u003e\n\n#calepin.setup(\n  echo: true,\n  eval: true,\n  results: \"verbatim\",\n  fenced-chunks: true,\n)\n\n#let target = sys.inputs.at(\"calepin-target\", default: \"paged\")\n\n#show: body =\u003e {\n  if target == \"html\" {\n    show \u003ccalepin-input\u003e: it =\u003e it.body\n    body\n  } else {\n    import \"@preview/codly:1.3.0\": *\n    import \"@preview/codly-languages:0.1.10\": *\n    show: codly-init\n    show: calepin.document\n    codly(languages: codly-languages)\n    codly(number-format: none)\n    show \u003ccalepin-input\u003e: it =\u003e it.body\n    set raw(theme: \"/.calepin/syntax.tmTheme\")\n    body\n  }\n}\n\n#calepin.setup(echo: true)\n\n#title()\n\n#calepin.elements.card[\n*Абстракция* -- парадигма, позволяющая на этапе проектирования ответить на вопрос: \"что должен делать объект\".#footnote[определение из лекции по ООП от 10.10.26]\n]\n"</script>
+<script id="calepin-website-source-data" type="application/json">"#import \"/.calepin/calepin.typ\" as calepin\n\n#set document(title: [Абстракция])\n#metadata((title: \"Абстракция\", translation_key: \"abstraction\")) \u003cwebsite-metadata\u003e\n\n#calepin.setup(\n  echo: true,\n  eval: true,\n  results: \"verbatim\",\n  fenced-chunks: true,\n)\n\n#let target = sys.inputs.at(\"calepin-target\", default: \"paged\")\n\n#show: body =\u003e {\n  if target == \"html\" {\n    show \u003ccalepin-input\u003e: it =\u003e it.body\n    body\n  } else {\n    import \"@preview/codly:1.3.0\": *\n    import \"@preview/codly-languages:0.1.10\": *\n    show: codly-init\n    show: calepin.document\n    codly(languages: codly-languages)\n    codly(number-format: none)\n    show \u003ccalepin-input\u003e: it =\u003e it.body\n    set raw(theme: \"/.calepin/syntax.tmTheme\")\n    body\n  }\n}\n\n#calepin.setup(echo: true)\n\n#title()\n\n#calepin.elements.card[\n*Абстракция* -- парадигма, позволяющая на этапе проектирования ответить на вопрос: \"что должен делать объект\".#footnote[определение из лекции по ООП от 10.10.26]\n]\n\n#calepin.elements.card[\n*Абстракция* — это выделение главных, существенных характеристик объекта и его внешнего интерфейса с сокрытием внутренних деталей реализации. Она позволяет сформулировать единый \"контракт\" (набор методов), которому обязаны следовать все его конкретные подклассы. #footnote[Объектно-ориентированное мышление -- Мэтт Вайсфельд]\n]\n\nВ Python абстракция реализуется с помощью встроенного модуля `ABC` (Abstract Base Classes):\n\nОсобенности:\n+ *Создание абстрактного класса:* Класс наследуется от `abc.ABC`.\n+ *Абстрактные методы:* Методы интерфейса, у которых нет готовой реализации, помечаются декоратором `@abc.abstractmethod`.\n+ *Защита от инстанцирования:* Создать экземпляр абстрактного класса напрямую нельзя. Если в подклассе не реализован хотя бы один абстрактный метод, при попытке создать его экземпляр Python выбросит исключение `TypeError`.\n\n```python\nfrom abc import ABC, abstractmethod\nimport math\n\nclass Shape(ABC):\n\n    @abstractmethod\n    def area(self):\n        \"\"\"Метод для вычисления площади\"\"\"\n        pass\n\n    @abstractmethod\n    def perimeter(self):\n        \"\"\"Метод для вычисления периметра\"\"\"\n        pass\n\n\nclass Rectangle(Shape):\n    def __init__(self, width, height):\n        self.width = width\n        self.height = height\n\n    def area(self):\n        return self.width * self.height\n\n    def perimeter(self):\n        return 2 * (self.width + self.height)\n\n\nclass Circle(Shape):\n    def __init__(self, radius):\n        self.radius = radius\n\n    def area(self):\n        return math.pi * self.radius ** 2\n\n    def perimeter(self):\n        return 2 * math.pi * self.radius\n```\n\n```python\nrect = Rectangle(5, 10)\ncircle = Circle(7)\n```\n\nПлощадь прямоугольника:\n```python\nrect.area()\n```\n\nПериметр прямоугольника:\n```python\nrect.perimeter()\n```\n\nПлощадь круга:\n```python\ncircle.area()\n```\n\nВот что будет, если попробовать создать экземпляр абстрактного класса:\n```python\n#| error: true\nshape = Shape()\n```\n"</script>
 </head><body>
 
     <header class="calepin-website-topbar calepin-site-topbar">
@@ -2988,7 +2988,52 @@ html:not([data-theme]) {
             </nav>
         </aside>
         <main class="calepin-website-main calepin-content" data-pagefind-body>
-            <h1 id="section">Абстракция</h1><article class="calepin-elements-card" style="display: block; margin-block: 1rem; padding: 1rem; overflow: hidden; border: 1px solid var(--pico-muted-border-color); border-radius: 0.8rem; background: var(--pico-background-color); color: var(--pico-color); box-shadow: 0 0.65rem 1.5rem rgba(15, 23, 42, 0.08); max-width: 100%;"><strong>Абстракция</strong> – парадигма, позволяющая на этапе проектирования ответить на вопрос: “что должен делать объект”.<sup id="loc-1" role="doc-noteref"><a href="#loc-2">1</a></sup></article><section role="doc-endnotes"><ol style="list-style-type: none"><li id="loc-2"><sup role="doc-backlink"><a href="#loc-1">1</a></sup>определение из лекции по ООП от 10.10.26</li></ol></section>
+            <h1 id="section">Абстракция</h1><article class="calepin-elements-card" style="display: block; margin-block: 1rem; padding: 1rem; overflow: hidden; border: 1px solid var(--pico-muted-border-color); border-radius: 0.8rem; background: var(--pico-background-color); color: var(--pico-color); box-shadow: 0 0.65rem 1.5rem rgba(15, 23, 42, 0.08); max-width: 100%;"><strong>Абстракция</strong> – парадигма, позволяющая на этапе проектирования ответить на вопрос: “что должен делать объект”.<sup id="loc-1" role="doc-noteref"><a href="#loc-3">1</a></sup></article><article class="calepin-elements-card" style="display: block; margin-block: 1rem; padding: 1rem; overflow: hidden; border: 1px solid var(--pico-muted-border-color); border-radius: 0.8rem; background: var(--pico-background-color); color: var(--pico-color); box-shadow: 0 0.65rem 1.5rem rgba(15, 23, 42, 0.08); max-width: 100%;"><strong>Абстракция</strong> — это выделение главных, существенных характеристик объекта и его внешнего интерфейса с сокрытием внутренних деталей реализации. Она позволяет сформулировать единый “контракт” (набор методов), которому обязаны следовать все его конкретные подклассы.<sup id="loc-2" role="doc-noteref"><a href="#loc-4">2</a></sup></article><p>В Python абстракция реализуется с помощью встроенного модуля <code>ABC</code> (Abstract Base Classes):</p><p>Особенности:</p><ol><li><strong>Создание абстрактного класса:</strong> Класс наследуется от <code>abc.ABC</code>.</li><li><strong>Абстрактные методы:</strong> Методы интерфейса, у которых нет готовой реализации, помечаются декоратором <code>@abc.abstractmethod</code>.</li><li><strong>Защита от инстанцирования:</strong> Создать экземпляр абстрактного класса напрямую нельзя. Если в подклассе не реализован хотя бы один абстрактный метод, при попытке создать его экземпляр Python выбросит исключение <code>TypeError</code>.</li></ol><div class="sourceCode" data-lang="python"><pre><code data-lang="python"><span class="calepin-syntax-scope-10">from</span> abc <span class="calepin-syntax-scope-10">import</span> ABC<span class="calepin-syntax-scope-26">,</span> abstractmethod
+<span class="calepin-syntax-scope-10">import</span> math
+
+<span class="calepin-syntax-scope-6">class</span> <span class="calepin-syntax-scope-15">Shape</span>(ABC):
+
+    <span class="calepin-syntax-scope-25">@</span>abstractmethod
+    <span class="calepin-syntax-scope-6">def</span> <span class="calepin-syntax-scope-20">area</span>(<span class="calepin-syntax-scope-28">self</span>):
+        <span class="calepin-syntax-scope-2">"""</span><span class="calepin-syntax-scope-1">Метод для вычисления площади</span><span class="calepin-syntax-scope-2">"""</span>
+        <span class="calepin-syntax-scope-10">pass</span>
+
+    <span class="calepin-syntax-scope-25">@</span>abstractmethod
+    <span class="calepin-syntax-scope-6">def</span> <span class="calepin-syntax-scope-20">perimeter</span>(<span class="calepin-syntax-scope-28">self</span>):
+        <span class="calepin-syntax-scope-2">"""</span><span class="calepin-syntax-scope-1">Метод для вычисления периметра</span><span class="calepin-syntax-scope-2">"""</span>
+        <span class="calepin-syntax-scope-10">pass</span>
+
+
+<span class="calepin-syntax-scope-6">class</span> <span class="calepin-syntax-scope-15">Rectangle</span>(Shape):
+    <span class="calepin-syntax-scope-6">def</span> <span class="calepin-syntax-scope-21">__init__</span>(<span class="calepin-syntax-scope-28">self</span><span class="calepin-syntax-scope-26">,</span> <span class="calepin-syntax-scope-28">width</span><span class="calepin-syntax-scope-26">,</span> <span class="calepin-syntax-scope-28">height</span>):
+        <span class="calepin-syntax-scope-12">self</span>.width <span class="calepin-syntax-scope-27">=</span> width
+        <span class="calepin-syntax-scope-12">self</span>.height <span class="calepin-syntax-scope-27">=</span> height
+
+    <span class="calepin-syntax-scope-6">def</span> <span class="calepin-syntax-scope-20">area</span>(<span class="calepin-syntax-scope-28">self</span>):
+        <span class="calepin-syntax-scope-10">return</span> <span class="calepin-syntax-scope-12">self</span>.width <span class="calepin-syntax-scope-24">*</span> <span class="calepin-syntax-scope-12">self</span>.height
+
+    <span class="calepin-syntax-scope-6">def</span> <span class="calepin-syntax-scope-20">perimeter</span>(<span class="calepin-syntax-scope-28">self</span>):
+        <span class="calepin-syntax-scope-10">return</span> <span class="calepin-syntax-scope-23">2</span> <span class="calepin-syntax-scope-24">*</span> (<span class="calepin-syntax-scope-12">self</span>.width <span class="calepin-syntax-scope-24">+</span> <span class="calepin-syntax-scope-12">self</span>.height)
+
+
+<span class="calepin-syntax-scope-6">class</span> <span class="calepin-syntax-scope-15">Circle</span>(Shape):
+    <span class="calepin-syntax-scope-6">def</span> <span class="calepin-syntax-scope-21">__init__</span>(<span class="calepin-syntax-scope-28">self</span><span class="calepin-syntax-scope-26">,</span> <span class="calepin-syntax-scope-28">radius</span>):
+        <span class="calepin-syntax-scope-12">self</span>.radius <span class="calepin-syntax-scope-27">=</span> radius
+
+    <span class="calepin-syntax-scope-6">def</span> <span class="calepin-syntax-scope-20">area</span>(<span class="calepin-syntax-scope-28">self</span>):
+        <span class="calepin-syntax-scope-10">return</span> math.pi <span class="calepin-syntax-scope-24">*</span> <span class="calepin-syntax-scope-12">self</span>.radius <span class="calepin-syntax-scope-24">*</span><span class="calepin-syntax-scope-24">*</span> <span class="calepin-syntax-scope-23">2</span>
+
+    <span class="calepin-syntax-scope-6">def</span> <span class="calepin-syntax-scope-20">perimeter</span>(<span class="calepin-syntax-scope-28">self</span>):
+        <span class="calepin-syntax-scope-10">return</span> <span class="calepin-syntax-scope-23">2</span> <span class="calepin-syntax-scope-24">*</span> math.pi <span class="calepin-syntax-scope-24">*</span> <span class="calepin-syntax-scope-12">self</span>.radius
+</code></pre></div><div class="sourceCode" data-lang="python"><pre><code data-lang="python">rect <span class="calepin-syntax-scope-27">=</span> <span class="calepin-syntax-scope-22">Rectangle</span>(<span class="calepin-syntax-scope-23">5</span><span class="calepin-syntax-scope-26">,</span> <span class="calepin-syntax-scope-23">10</span>)
+circle <span class="calepin-syntax-scope-27">=</span> <span class="calepin-syntax-scope-22">Circle</span>(<span class="calepin-syntax-scope-23">7</span>)
+</code></pre></div><p>Площадь прямоугольника:</p><div class="sourceCode" data-lang="python"><pre><code data-lang="python">rect.<span class="calepin-syntax-scope-22">area</span>()
+</code></pre></div><div class="cell-output cell-output-stdout"><pre><code>50</code></pre></div><p>Периметр прямоугольника:</p><div class="sourceCode" data-lang="python"><pre><code data-lang="python">rect.<span class="calepin-syntax-scope-22">perimeter</span>()
+</code></pre></div><div class="cell-output cell-output-stdout"><pre><code>30</code></pre></div><p>Площадь круга:</p><div class="sourceCode" data-lang="python"><pre><code data-lang="python">circle.<span class="calepin-syntax-scope-22">area</span>()
+</code></pre></div><div class="cell-output cell-output-stdout"><pre><code>153.93804002589985</code></pre></div><p>Вот что будет, если попробовать создать экземпляр абстрактного класса:</p><div class="sourceCode" data-lang="python"><pre><code data-lang="python">shape <span class="calepin-syntax-scope-27">=</span> <span class="calepin-syntax-scope-22">Shape</span>()
+</code></pre></div><div class="cell-output cell-output-stderr"><pre><code>Traceback (most recent call last):
+  File "&lt;chunk>", line 1, in &lt;module>
+TypeError: Can't instantiate abstract class Shape without an implementation for abstract methods 'area', 'perimeter'</code></pre></div><section role="doc-endnotes"><ol style="list-style-type: none"><li id="loc-3"><sup role="doc-backlink"><a href="#loc-1">1</a></sup>определение из лекции по ООП от 10.10.26</li><li id="loc-4"><sup role="doc-backlink"><a href="#loc-2">2</a></sup>Объектно-ориентированное мышление – Мэтт Вайсфельд</li></ol></section>
         </main>
                 
     </div>
